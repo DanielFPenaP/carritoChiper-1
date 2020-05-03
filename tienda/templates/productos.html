@@ -13,32 +13,43 @@
         <br>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
+<!--
             <nav class="navbar navbar-light bg-light">
                 <a class="navbar-brand" href="/">
 
-                <img src="/static/media/logo.png" width="45" height="45" alt="">
+                <img src="/logo.png" width="45" height="45" alt="">
                 </a>
             </nav>
+-->
 
           <nav class="navbar navbar-light bg-light">
               <a class="navbar-brand" href="/">
-                  Chiper App
+                  Tienda Chiper
               </a>
           </nav>
-
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="productos">Productos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Carritos</a>
                 </li>
             </ul>
 
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
           </div>
         </nav>
+
+
 
 
         <main> 
@@ -68,7 +79,7 @@
                         <!-- Content page -->
                         <div style="text-align:right;">
                                         <button type="button" class="btn btn-success waves-effect waves-light"
-                                                onClick=" # " style="text-align:center;">+
+                                                onClick="location.href='agregar'" style="text-align:center;">+
                                         </button>
                                     </div>
                         <div class="panel panel-default">
@@ -90,6 +101,15 @@
                                         <td>{{ producto.categoria }}</td>
                                         <td>{{ producto.precio }}</td>
                                         <td>{{ producto.disponibilidad }}</td>
+                                        <td>
+                                          <form method="POST"> 
+                                            {% csrf_token %}
+                                            <input name="id" type="hidden" value="{{ producto.nombre }}" id="id_id">
+                                            <label for="id_uni">Unidades:</label>
+                                            <input type="number" name="disponibilidad" value="1" required id="id_uni">
+                                            <button type="submit" class="btn btn-success waves-effect waves-light">Agregar</button>
+                                          </form> 
+                                        </td>
                                     </tr>
                                     {% endfor %}
 
@@ -98,7 +118,7 @@
 
                                 <div style="text-align:center;">
                                     <button type="button" class="btn btn-primary waves-effect waves-light"
-                                            onClick=" window.location.href='/' ">
+                                            onClick=" window.location.href='/tienda' ">
                                         Back
                                     </button>
                                 </div>
