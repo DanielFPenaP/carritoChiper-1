@@ -11,29 +11,28 @@ class Tendero(models.Model):
 
 
 class Producto(models.Model):
-    '''
     CATEGORIAS = [
-        (FRUTASVERDURAS, 'Frutas y verduras'),
-        (LICORES, 'Licores'),
-        (CUIDADO, 'Cuidado personal'),
-        (BEBIDAS, 'Bebidas'),
-        (LACTEOS, 'Lacteos'),
-        (SNACKS, 'Snacks'),
-        (HOGAR, 'Hogar'),
-        (PANADERIA, 'Panaderia'),
-        (DESPENSA, 'Despensa'),
-        (CONGELADOS, 'Congelados'),
-        (PASTASGRANOS, 'Pastas y granos'),
-        (PCP, 'Pollo, carne, pescado'),
-        (MASCOTAS, 'Mascotas'),
-        (FARMACIA, 'Farmacia'),
-        (OTROS, 'Otros'),
+        ('Frutas y verduras','Frutas y verduras'),
+        ('Licores','Licores'),
+        ('Cuidado personal','Cuidado personal'),
+        ('Bebidas','Bebidas'),
+        ('Lacteos','Lacteos'),
+        ('Snacks','Snacks'),
+        ('Hogar','Hogar'),
+        ('Panaderia','Panaderia'),
+        ('Despensa','Despensa'),
+        ('Congelados','Congelados'),
+        ('Pastas y granos','Pastas y granos'),
+        ('Pollo, carne, pescado','Pollo, carne, pescado'),
+        ('Mascotas','Mascotas'),
+        ('Farmacia','Farmacia'),
+        ('Otros','Otros'),
     ]
-    '''
-    nombre = models.CharField(max_length=200, primary_key=True)
-    categoria = models.CharField(max_length=200)
+
+    nombre = models.CharField(max_length=100, primary_key=True)
+    categoria = models.CharField(max_length=50,choices=CATEGORIAS)
     precio = models.PositiveIntegerField(default=0)
-    disponibilidad = models.IntegerField(default=0)
+    disponibilidad = models.PositiveIntegerField(default=0)
     def __str__(self):
         return "Nombre: "+self.nombre+", Categoria: "+self.categoria+", Precio: "+str(self.precio)
 
