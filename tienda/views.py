@@ -1,7 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .logic import getProductos, ProductoForm, create_producto
+from chiper.auth0backend import getRole
 from django.contrib import messages
+
 from django.urls import reverse
 
 def index(request):
@@ -20,20 +23,23 @@ def list_productos(request):
         }
         return render(request, 'productos.html', context)
 
+@login_required
 def producto_create(request):
-    if request.method == 'POST':
-        form = ProductoForm(request.POST)
-        if form.is_valid():
-            create_producto(form)
-            messages.add_message(request, messages.SUCCESS, 'Producto creado')
-            return HttpResponseRedirect('productos')
+    role = getRole(request)
+    if role == "Admin chiper":
+        if request.method == 'POST':
+            form = ProductoForm(request.POST)
+            if form.is_valid():
+                create_producto(form)
+                messages.add_message(request, messages.SUCCESS, 'Producto creado')
+                return HttpResponseRedirect('productos')
+            else:
+                print(form.errors)
         else:
-            print(form.errors)
+            form = ProductoForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'crearProducto.html', context)
     else:
-        form = ProductoForm()
-
-    context = {
-        'form': form
-    }
-
-    return render(request, 'crearProducto.html', context)
+        return HttpResponse("Unauthorized User")
