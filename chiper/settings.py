@@ -25,7 +25,7 @@ SECRET_KEY = 'ugi-5#_ar1e2&^twn1f%n^q3_3l%asiu6k&a)zxv@ai4u+ts7+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'monitoringDB',
         'USER':'monitoringUser',
         'PASSWORD':'isis2503',
-        'HOST':'monitoring-db.cxv6f2homhuo.us-east-1.rds.amazonaws.com',
+        'HOST':'monitoring-db2.c1h6d0xipxt6.us-east-1.rds.amazonaws.com',
         'PORT':'5432',
     }
 }
@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_URL = "/login/auth0"
 LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = " https://isis2503-juan2707.auth0.com/api/v2/logout?returnTo=http%3A%2F%2F3.81.252.130:8000"
+LOGOUT_REDIRECT_URL = " https://isis2503-juan2707.auth0.com/api/v2/logout?returnTo=http%3A%2F%2F3.81.252.130"
 SOCIAL_AUTH_TRAILING_SLASH = False
 # Remove end slash from routes
 SOCIAL_AUTH_AUTH0_DOMAIN = 'isis2503-juan2707.auth0.com'
@@ -144,3 +144,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
