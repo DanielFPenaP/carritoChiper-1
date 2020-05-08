@@ -10,18 +10,26 @@ from django.urls import reverse
 def index(request):
     return HttpResponse("Buenaas, estas en la tienda de chiper!")
 
+@login_required
 def list_productos(request):
-    if request.method == 'POST':
-        dict=request.POST
-        print(dict)
-        messages.add_message(request, messages.SUCCESS, 'Producto -'+dict.__getitem__('id')+'- agregado')
-        return HttpResponseRedirect('productos')
-    else:
-        productos = getProductos()
-        context = {
+    role = getRole(request)
+    if role == "Admin chiper":
+        if request.method == 'POST':
+            dict=request.POST
+            print(dict)
+            messages.add_message(request, messages.SUCCESS, 'Producto -'+dict.__getitem__('id')+'- agregado')
+            return HttpResponseRedirect('productos')
+        else:
+            productos = getProductos()
+            context = {
             'productos_list': productos
         }
         return render(request, 'productos.html', context)
+    else:
+        return HttpResponse("Unauthorized User")
+
+
+
 
 @login_required
 def producto_create(request):
