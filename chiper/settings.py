@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tienda.apps.TiendaConfig',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -79,8 +80,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'monitoringDB',
         'USER':'monitoringUser',
-        'PASSWORD':'xxxxxxxxx',
-        'HOST':'xxxxxxxx',
+        'PASSWORD':'isis2503',
+        'HOST':'monitoring-db.cxv6f2homhuo.us-east-1.rds.amazonaws.com',
         'PORT':'5432',
     }
 }
@@ -103,6 +104,26 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+#Autho config
+
+LOGIN_URL = "/login/auth0"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = " https://isis2503-juan2707.auth0.com/api/v2/logout?returnTo=http%3A%2F%2F3.81.252.130:8000"
+SOCIAL_AUTH_TRAILING_SLASH = False
+# Remove end slash from routes
+SOCIAL_AUTH_AUTH0_DOMAIN = 'isis2503-juan2707.auth0.com'
+SOCIAL_AUTH_AUTH0_KEY = 'giDoNKxl1HHnYGizvGITKtMnwoNN1ehy'
+SOCIAL_AUTH_AUTH0_SECRET = 'oAXSESVY4kj0axF7njPBYkyRxe5JH-A0nw94St-id_L8tLVah9KiipHSxZNAYB6S'
+
+SOCIAL_AUTH_AUTH0_SCOPE = [
+    'openid',
+    'profile'
+]
+
+AUTHENTICATION_BACKENDS = {
+    'chiper.auth0backend.Auth0',
+    'django.contrib.auth.backends.ModelBackend',
+    }
 
 
 # Internationalization

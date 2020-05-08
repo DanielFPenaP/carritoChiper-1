@@ -19,4 +19,7 @@ from django.urls import include, path
 urlpatterns = [
     path('tienda/', include('tienda.urls')),
     path('admin/', admin.site.urls),
+path(r'', include('django.contrib.auth.urls')),
+    path(r'', include('social_django.urls')),
+
 ]
